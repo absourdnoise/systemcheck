@@ -1,0 +1,4 @@
+[Project]
+Name=system_check
+Manager=KDevCustomMakeManager
+VersionControl=
