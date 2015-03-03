@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 
-
 int checkTCPConnetcion(char ip_address[15],int port) {
   printf("Cheking %s:%d\n", ip_address, port);
   return 0;
