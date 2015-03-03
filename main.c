@@ -1,9 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/socket.h>
+#include <memory.h>
 
 
 int checkTCPConnetcion(char ip_address[15],int port) {
-  printf("Cheking %s:%d\n", ip_address, port);
+  int sockfd;
+  
+  if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+	printf("Socket ERROR\n");
+	return -1;
+  }
   return 0;
 }
 
