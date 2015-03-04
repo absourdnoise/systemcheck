@@ -26,9 +26,9 @@ int checkTCPConnetcion(char ip_address[15],int port) {
 	  return -1;
 	}
 	else {
-	  if(connect(sockfd, (SA *) &servaddr, sizeof(servaddr)) <0) {
+	  if(connect(sockfd, (struct sockaddr *) &servaddr, sizeof(servaddr)) <0) {
 		printf("connect ERROR\n");
-		return -1;		
+		return -1;
 	  }
 	  else {
 		while( (n = read(sockfd, recivline, MAXLINE)) > 0) {
