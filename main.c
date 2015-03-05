@@ -8,13 +8,14 @@
 
 #define MAXLINE 256
 
-int checkTCPConnetcion(char ip_address[15],int port) {
+int checkTCPConnetcion(char ip_address[15], int port) {
   int sockfd, n;
   char recivline[MAXLINE + 1];
+  
   struct sockaddr_in servaddr;
   
   if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-	printf("Socket ERROR\n");
+	perror("Socket ERROR");
 	return -1;
   }
   else {
@@ -22,24 +23,24 @@ int checkTCPConnetcion(char ip_address[15],int port) {
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_port = htons(port);
 	if(inet_pton(AF_INET, ip_address, &servaddr.sin_addr) <= 0) {
-	  printf("inet_pton ERROR\n");
+	  perror("inet_pton ERROR");
 	  return -1;
 	}
 	else {
-	  if(connect(sockfd, (struct sockaddr *) &servaddr, sizeof(servaddr)) <0) {
-		printf("connect ERROR\n");
+	  if(connect(sockfd, (struct sockaddr *) &servaddr, sizeof(servaddr)) < 0) {
+		perror("connect ERROR");
 		return -1;
 	  }
 	  else {
 		while( (n = read(sockfd, recivline, MAXLINE)) > 0) {
 		  recivline[n] = 0;
 		  if(fputs(recivline, stdout) == EOF) {
-			printf("fputs ERROR\n");
+			perror("fputs ERROR");
 			return -1;
 		  }
 		}
 		if(n < 0) {
-		  printf("read ERROR\n");
+		  perror("read ERROR");
 		  return -1;
 		}
 	  }
@@ -49,6 +50,6 @@ int checkTCPConnetcion(char ip_address[15],int port) {
 }
 
 int main(int argc, char **argv) {
-  checkTCPConnetcion("213.186.120.101", 80);
+  checkTCPConnetcion("213.186.114.98", 110);
   return 0;
 }
